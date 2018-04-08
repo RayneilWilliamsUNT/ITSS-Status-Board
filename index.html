@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
@@ -13,7 +15,7 @@
     <script src="js/bootstrap.min.js"></script>
 
     <!-- Working Ajax call -->
-    
+
 	<script>
     $( document ).ready(function(){
         $("#button1").click(function(){
@@ -25,13 +27,25 @@
 					console.log(data);
 					console.log("Success!");
 					console.log(data[0].name);
-					
-
+                    /*
 					var table = $("#table tbody");
 					$.each(data, function(index, elem){
 						table.append("<tr><td>"+elem.name+"</td><td>"+elem.status+"</td></tr>");
 					});
+                    */
+                    $.each(data, function(index, elem){
+                        $("#uptime-boards-" + (index+1)).text(elem.name);
+                        if(elem.status == 0){
+                            $("#uptime-boards-" + (index+1)).css("background-color", "green");
+                        }
+                        else if(elem.status == 1 || elem.status == 2){
+                            $("#uptime-boards-" + (index+1)).css("background-color", "yellow");
+                        }
+                        else{
+                            $("#uptime-boards-" + (index+1)).css("background-color", "red");
+                        }
 
+                    });
 				},
 				error: function (data) {
                     console.log(data)
@@ -58,9 +72,9 @@
 
 <!-- Title row-->
 <div class="container">
-<h1 align="center"  style="color:white;">UNT ITSS Status Board</h1>    
+<h1 align="center"  style="color:white;">UNT ITSS Status Board</h1>
 
-  
+
 <!-- Drilldown -->
 <form action="http://45.55.155.214:8083/drilldown" method="post" target="_blank">
   Enter a ServiceID to retrieve the aggregate services, or "drill down" <br>
@@ -70,11 +84,11 @@
 </form>
 
 
-  
+
     <div class="jumbotron vertical-center">
 
 
-	<div class="container">	
+	<div class="container">
 <!-- Row 1 -->
             <div class="row" id="uptime-con">
                 <div class="col col-md" id="uptime-boards-1">
@@ -258,19 +272,21 @@
                 </div>
             </div>
 
-			
+
 			<div class="row">
 				<div class="col-sm-12 text-center">
 					    <button id="button1" type="button">Enter</button>
 							<small> DYNAMICALLY PUT THE TIME THE PAGE WAS GENERATED IN HERE    </small>
 				</div>
 			</div>
-			
+
         </div><!-- div class="container" -->
     </div> <!-- div class="jumbotron vertical-center" -->
    </div> <!-- div class="container" -->
 </body>
 
+
+</html>
 
 
 
@@ -323,7 +339,7 @@
 <body>
   <h1 align="center"  style="color:black;">UNT ITSS Status Board</h1>
 
-                                                                                               
+
     <div class="jumbotron vertical-center">
     <div class="container">
 
@@ -377,7 +393,7 @@
 			  </tr>
 			  </table>
       </div>
-      
+
       <div class="text-left col-sm-4">
               <table style='border:1px solid black;'>
 			  <tr valign='middle'>
@@ -388,7 +404,7 @@
 			  </tr>
 			  </table>
       </div>
-      
+
       <div class="text-left col-sm-4">
               <table style='border:1px solid black; border-spacing: 2px; border-collapse: separate;'>
 			  <tr valign='middle'><td style='border-radius: 5px;padding:8px' class='green-bg2'>
